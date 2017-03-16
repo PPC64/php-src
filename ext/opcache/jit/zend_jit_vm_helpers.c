@@ -29,9 +29,14 @@
 #if defined(__x86_64__)
 register zend_execute_data* volatile execute_data __asm__("%r14");
 register const zend_op* volatile opline __asm__("%r15");
-#else
+#elif defined(__i386__)
 register zend_execute_data* volatile execute_data __asm__("%esi");
 register const zend_op* volatile opline __asm__("%edi");
+#elif defined(__powerpc__)
+/*TODO use two non volatile registers here (callee saved)*/
+# error "Unimplemented architecture: powerpc"
+#else
+# error "Unsupported architecture"
 #endif
 #pragma GCC diagnostic warning "-Wvolatile-register-var"
 
