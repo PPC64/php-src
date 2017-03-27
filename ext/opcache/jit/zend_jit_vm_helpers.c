@@ -32,9 +32,9 @@ register const zend_op* volatile opline __asm__("%r15");
 #elif defined(__i386__)
 register zend_execute_data* volatile execute_data __asm__("%esi");
 register const zend_op* volatile opline __asm__("%edi");
-#elif defined(__powerpc__)
-/*TODO use two non volatile registers here (callee saved)*/
-# error "Unimplemented architecture: powerpc"
+#elif defined(__powerpc64__)
+register zend_execute_data *execute_data __asm__("r28");
+register const zend_op *opline __asm__("r29");
 #else
 # error "Unsupported architecture"
 #endif
