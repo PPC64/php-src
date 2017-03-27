@@ -82,11 +82,19 @@ static void **dasm_ptr = NULL;
 static int zend_may_throw(const zend_op *opline, zend_op_array *op_array, zend_ssa *ssa);
 static int zend_may_overflow(const zend_op *opline, zend_op_array *op_array, zend_ssa *ssa);
 
+
+#if defined(__x86_64__)
 #include "dynasm/dasm_x86.h"
 #include "jit/zend_jit_x86.h"
-#include "jit/zend_jit_helpers.c"
 #include "jit/zend_jit_x86.c"
 #include "jit/zend_jit_disasm_x86.c"
+#elif defined(__powerpc64__)
+//TODO include ppc64le arch specifics here
+#elif
+# error "Unsupported architecture"
+#endif
+
+#include "jit/zend_jit_helpers.c"
 #include "jit/zend_jit_gdb.c"
 #include "jit/zend_jit_perf_dump.c"
 #ifdef HAVE_OPROFILE
