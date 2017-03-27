@@ -93,8 +93,8 @@ enum {
 	DW_REG_12, DW_REG_13, DW_REG_14, DW_REG_15,
 	DW_REG_RA,
     /* TODO: ARM supports? */
-#elif defined(__powerpc__)
-#error "Unimplemented architecture: powerpc"
+#elif defined(__powerpc64__)
+#error "Unimplemented architecture"
 #else
 #error "Unsupported target architecture"
 #endif
@@ -160,8 +160,8 @@ static const zend_elf_header zend_elfhdr_template = {
 	.machine     = 3,
 #elif defined(__x86_64__)
 	.machine     = 62,
-#elif defined(__powerpc__)
-# error "Unimplemented architecture: powerpc"
+#elif defined(__powerpc64__)
+# error "Unimplemented architecture"
 #else
 # error "Unsupported target architecture"
 #endif
@@ -329,8 +329,8 @@ static void zend_gdbjit_ehframe(zend_gdbjit_ctx *ctx)
 #elif defined(__x86_64__)
     DB(DW_CFA_advance_loc|4);            /* sub $0x8,%rsp */
     DB(DW_CFA_def_cfa_offset); DUV(16);  /* Aligned stack frame size. */
-#elif defined(__powerpc__)
-# error "Unimplemented architecture: powerpc"
+#elif defined(__powerpc64__)
+# error "Unimplemented architecture"
 #else
 # error "Unsupported target architecture"
 #endif

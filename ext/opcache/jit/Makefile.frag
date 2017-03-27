@@ -3,11 +3,11 @@ uname_arch := $(shell uname -m)
 
 # PPC JIT only for 64 bits little endian
 ifeq ($(uname_arch),ppc64le)
-	uname_arch := ppc
+	uname_arch := ppc64le
 else ifeq ($(uname_arch),$(filter $(uname_arch),x86_64 i386 i686 amd64))
 	uname_arch := x86
 else 
-$(error JIT is not supported for this architecture)
+$(error This architecture does not support JIT)
 endif
 
 $(builddir)/minilua: $(srcdir)/jit/dynasm/minilua.c
